@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>Testing WebSocket Connection</h1>
+    <div id="status">Disconnected</div>
+    <div id="messages"></div>
+    
+    <script>
+        const ws = new WebSocket('ws://localhost:3001/api/jupiter-proxy/ws');
+        const statusDiv = document.getElementById('status');
+        const messagesDiv = document.getElementById('messages');
+        
+        ws.onopen = function() {
+            statusDiv.textContent = 'Connected!';
+            statusDiv.style.color = 'green';
+            
+            // Subscribe to some tokens
+            ws.send(JSON.stringify({
+                type: 'subscribe:pool',
+                pools: ['So11111111111111111111111111111111111111112'] // SOL as test
+            }));
+        };
+        
+        ws.onmessage = function(event) {
+            const div = document.createElement('div');
+            div.textContent = `Message: ${event.data}`;
+            messagesDiv.appendChild(div);
+            
+            // Keep only last 10 messages
+            if (messagesDiv.children.length > 10) {
+                messagesDiv.removeChild(messagesDiv.firstChild);
+            }
+        };
+        
+        ws.onclose = function() {
+            statusDiv.textContent = 'Disconnected';
+            statusDiv.style.color = 'red';
+        };
+        
+        ws.onerror = function(error) {
+            statusDiv.textContent = 'Error: ' + error;
+            statusDiv.style.color = 'red';
+        };
+    </script>
+</body>
+</html>

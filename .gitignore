@@ -1,0 +1,62 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# lockfiles — always install fresh latest versions
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+bun.lock
+
+# next.js
+.next
+.next/*
+/out/
+logs/
+
+.playwright-mcp/
+.tmp-esbuild/
+settings.local.json
+
+# production
+/build
+
+referral-transactions/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+.serena/
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+pnpm-workspace.yaml
+
+
+public/cached*
+
+.pm2/
+.DS_Store
+
+# IDE settings
+.vscode/settings.json.serena/
+
+# Local tooling / private config (kept out of open source release)
+.claude/
+.agents/
+_PLANS/
+skills-lock.json
+
+# macOS
+.DS_Store

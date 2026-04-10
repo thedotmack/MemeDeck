@@ -1,0 +1,625 @@
+@import "tailwindcss";
+
+@source '../*.{js,ts,jsx,tsx,mdx}';
+
+@custom-variant dark (&:is(.dark *));
+
+/* latin */
+@font-face {
+  font-family: "Overpass";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/Overpass.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Freeman";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Freeman.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "10_Bucks";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/10_Bucks.woff2) format("woff2");
+}
+
+@utility font-money {
+  font-family: "10_Bucks", monospace;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/JetBrainsMono.woff2) format("woff2");
+}
+
+/* Custom Font Faces */
+@font-face {
+  font-family: "NASA";
+  src: url("/fonts/Nasa.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blauer Nue";
+  src:
+    url("/fonts/blauer-nue/BlauerNue-Regular.woff2") format("woff2"),
+    url("/fonts/blauer-nue/BlauerNue-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blauer Nue";
+  src:
+    url("/fonts/blauer-nue/BlauerNue-Medium.woff2") format("woff2"),
+    url("/fonts/blauer-nue/BlauerNue-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blauer Nue";
+  src:
+    url("/fonts/blauer-nue/BlauerNue-SemiBold.woff2") format("woff2"),
+    url("/fonts/blauer-nue/BlauerNue-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blauer Nue";
+  src:
+    url("/fonts/blauer-nue/BlauerNue-Bold.woff2") format("woff2"),
+    url("/fonts/blauer-nue/BlauerNue-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blauer Nue";
+  src:
+    url("/fonts/blauer-nue/BlauerNue-ExtraBold.woff2") format("woff2"),
+    url("/fonts/blauer-nue/BlauerNue-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Ensure celebrations never block pointer events */
+.celebration-overlay,
+.celebration-overlay * {
+  pointer-events: none !important;
+}
+
+/* Hide TradingView watermark in lightweight charts */
+#tv-attr-logo {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Also hide the containing cell */
+#tv-attr-logo,
+a[href*="tradingview.com"] {
+  display: none !important;
+}
+
+/* Hide scrollbar for story circles */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+@theme {
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  --color-cream-100: #f8f5e6;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pixel {
+  /* Add a utility class for pixel-perfect text */
+  text-rendering: optimizeSpeed;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@utility text-retro-shadow {
+  /* Add a utility class for retro text shadow */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@utility font-nasa {
+  /* NASA font utility for headings */
+  font-family: "NASA", "Blauer Nue", sans-serif;
+  text-transform: uppercase;
+}
+
+@utility font-overpass {
+  /* NASA font utility for headings */
+  font-family: "Overpass", "Blauer Nue", sans-serif;
+  text-transform: uppercase;
+}
+
+@utility font-blauer {
+  /* Blauer Nue font utility for body text */
+  font-family:
+    "Blauer Nue",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+@utility font-mono {
+  /* JetBrains Mono font utility for monospace text */
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@utility font-number {
+  font-family: "Freeman", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@utility card-glass-effect {
+  /* Card-specific utilities */
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+@utility card-inner-shadow {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+@utility card-glow {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+@utility card-text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@layer utilities {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+      )
+      rgb(var(--background-start-rgb));
+    font-family:
+      "Blauer Nue",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.02em; /* Slight letter spacing for better readability */
+  }
+
+  /* Headings use NASA font */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "NASA", "Blauer Nue", sans-serif;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: 2.5rem; /* 40px */
+  }
+
+  h2 {
+    font-size: 2rem; /* 32px */
+  }
+
+  h3 {
+    font-size: 1.75rem; /* 28px */
+  }
+
+  h4 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  h5 {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  h6 {
+    font-size: 1.125rem; /* 18px */
+  }
+
+  .bg-cream-100 {
+    background-color: #f8f5e6;
+  }
+}
+
+
+@layer base {
+  :root {
+    --background: #ffffff; /* Pure white */
+    --foreground: #0a0a0a; /* Very dark gray */
+    --card: #ffffff; /* Pure white */
+    --card-foreground: #0a0a0a; /* Very dark gray */
+    --popover: #ffffff; /* Pure white */
+    --popover-foreground: #0a0a0a; /* Very dark gray */
+    --primary: #171717; /* Dark gray */
+    --primary-foreground: #fafafa; /* Very light gray */
+    --secondary: #f5f5f5; /* Light gray */
+    --secondary-foreground: #171717; /* Dark gray */
+    --muted: #f5f5f5; /* Light gray */
+    --muted-foreground: #737373; /* Medium gray */
+    --accent: #f5f5f5; /* Light gray */
+    --accent-foreground: #171717; /* Dark gray */
+    --destructive: #ef4444; /* Red */
+    --destructive-foreground: #fafafa; /* Very light gray */
+    --border: #e5e5e5; /* Light gray border */
+    --input: #e5e5e5; /* Light gray input */
+    --ring: #0a0a0a; /* Very dark gray ring */
+    --chart-1: #ea580c; /* Orange */
+    --chart-2: #0d9488; /* Teal */
+    --chart-3: #1e40af; /* Blue */
+    --chart-4: #ca8a04; /* Yellow */
+    --chart-5: #dc2626; /* Red-orange */
+    --radius: 0.5rem;
+    --sidebar-background: #fafafa; /* Very light gray */
+    --sidebar-foreground: #404040; /* Medium-dark gray */
+    --sidebar-primary: #1a1a1a; /* Very dark gray */
+    --sidebar-primary-foreground: #fafafa; /* Very light gray */
+    --sidebar-accent: #f5f5f5; /* Light gray */
+    --sidebar-accent-foreground: #1a1a1a; /* Very dark gray */
+    --sidebar-border: #d1d5db; /* Light blue-gray */
+    --sidebar-ring: #3b82f6; /* Blue */
+  }
+  .dark {
+    --background: #0a0a0a; /* Very dark gray */
+    --foreground: #fafafa; /* Very light gray */
+    --card: #0a0a0a; /* Very dark gray */
+    --card-foreground: #fafafa; /* Very light gray */
+    --popover: #0a0a0a; /* Very dark gray */
+    --popover-foreground: #fafafa; /* Very light gray */
+    --primary: #fafafa; /* Very light gray */
+    --primary-foreground: #171717; /* Dark gray */
+    --secondary: #262626; /* Dark gray */
+    --secondary-foreground: #fafafa; /* Very light gray */
+    --muted: #262626; /* Dark gray */
+    --muted-foreground: #a3a3a3; /* Medium gray */
+    --accent: #262626; /* Dark gray */
+    --accent-foreground: #fafafa; /* Very light gray */
+    --destructive: #7c2d12; /* Dark red */
+    --destructive-foreground: #fafafa; /* Very light gray */
+    --border: #262626; /* Dark gray border */
+    --input: #262626; /* Dark gray input */
+    --ring: #d4d4d4; /* Light gray ring */
+    --chart-1: #3b82f6; /* Blue */
+    --chart-2: #10b981; /* Green */
+    --chart-3: #f59e0b; /* Amber */
+    --chart-4: #8b5cf6; /* Purple */
+    --chart-5: #f97316; /* Orange */
+    --sidebar-background: #1a1a1a; /* Very dark gray */
+    --sidebar-foreground: #f5f5f5; /* Light gray */
+    --sidebar-primary: #3b82f6; /* Blue */
+    --sidebar-primary-foreground: #ffffff; /* Pure white */
+    --sidebar-accent: #292929; /* Dark gray */
+    --sidebar-accent-foreground: #f5f5f5; /* Light gray */
+    --sidebar-border: #292929; /* Dark gray */
+    --sidebar-ring: #3b82f6; /* Blue */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Help modal styles */
+.tooltip-trigger {
+  cursor: help;
+  border-bottom: 1px dashed #60a5fa;
+  color: #60a5fa;
+}
+
+/* System font stack for help modal */
+.system-font {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Improve scrollbar appearance for the modal */
+.modal-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 10px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(96, 165, 250, 0.5);
+  border-radius: 10px;
+}
+
+.modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(96, 165, 250, 0.7);
+}
+
+/* Prevent flash of unstyled content */
+.no-fouc {
+  visibility: hidden;
+}
+
+.fouc-ready {
+  visibility: visible;
+}
+
+
+/* Prevent pull-to-refresh and other browser gestures */
+body {
+  overscroll-behavior: none;
+}
+
+
+/* Improve tap targets for mobile */
+@media (max-width: 768px) {
+  button,
+  .button,
+  [role="button"] {
+    min-height: 36px;
+    min-width: 38px;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+
+
+/* Card hand selectors - target individual cards within each set */
+
+/* When a .memedeck--card is hovered, target all its siblings
+.memedeck--card:hover ~ .memedeck--card,
+.memedeck--card:hover:not(:first-child) ~ .memedeck--card,
+.memedeck--card:hover ~ .memedeck--card,
+.memedeck--card:hover:not(:last-child) {
+  @apply scale-90;
+}
+.memedeck--card:hover {
+  @apply scale-110;
+} */
+
+/* Alternative universal sibling targeting using :has (if supported) */
+
+/* GPU-accelerated transforms for card fan layout */
+.memedeck--card {
+  @apply transform-gpu;
+}
+
+/* Fan effects and hover states only on md+ screens (768px and up) */
+@media (min-width: 768px) {
+  .memedeck--hand:has(.memedeck--card:hover) .memedeck--card:not(:hover) {
+    @apply scale-90 duration-500;
+  }
+  .memedeck--card:hover {
+    @apply scale-110 duration-500;
+  }
+
+  /* HOVER STATES - Reset all transforms to 0 on hand hover */
+  .memedeck--hand:hover .memedeck--card {
+    @apply !translate-x-0 !translate-y-0 !rotate-0;
+  }
+
+  /* 2 CARDS *********************************************** */
+  .memedeck--hand:has(.memedeck--card:nth-child(2):last-child)
+    .memedeck--card:nth-child(1) {
+    /* First of 2 cards */
+    @apply translate-x-20 -rotate-5 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(2):last-child)
+    .memedeck--card:nth-child(2) {
+    /* Second of 2 cards */
+    @apply -translate-x-20 rotate-5 transform;
+  }
+
+  /* 3 CARDS *********************************************** */
+  .memedeck--hand:has(.memedeck--card:nth-child(3):last-child)
+    .memedeck--card:nth-child(1) {
+    /* First of 3 cards */
+    @apply translate-x-40 -rotate-7 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(3):last-child)
+    .memedeck--card:nth-child(2) {
+    /* Second of 3 cards */
+    @apply -translate-y-7 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(3):last-child)
+    .memedeck--card:nth-child(3) {
+    /* Third of 3 cards */
+    @apply -translate-x-40 rotate-7 transform;
+  }
+
+  /* 4 CARDS *********************************************** */
+  .memedeck--hand:has(.memedeck--card:nth-child(4):last-child)
+    .memedeck--card:nth-child(1) {
+    /* First of 4 cards */
+    @apply translate-x-63 translate-y-12 -rotate-12 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(4):last-child)
+    .memedeck--card:nth-child(2) {
+    /* Second of 4 cards */
+    @apply translate-x-20 -rotate-5 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(4):last-child)
+    .memedeck--card:nth-child(3) {
+    /* Third of 4 cards */
+    @apply -translate-x-20 rotate-5 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(4):last-child)
+    .memedeck--card:nth-child(4) {
+    /* Fourth of 4 cards */
+    @apply -translate-x-63 translate-y-12 rotate-12 transform;
+  }
+
+  /* 5 CARDS *********************************************** */
+  .memedeck--hand:has(.memedeck--card:nth-child(5):last-child)
+    .memedeck--card:nth-child(1) {
+    /* First of 5 cards */
+    @apply translate-x-86 translate-y-16 -rotate-12 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(5):last-child)
+    .memedeck--card:nth-child(2) {
+    /* Second of 5 cards */
+    @apply translate-x-40 -rotate-7 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(5):last-child)
+    .memedeck--card:nth-child(3) {
+    /* Third of 5 cards */
+    @apply -translate-y-7 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(5):last-child)
+    .memedeck--card:nth-child(4) {
+    /* Fourth of 5 cards */
+    @apply -translate-x-40 rotate-7 transform;
+  }
+
+  .memedeck--hand:has(.memedeck--card:nth-child(5):last-child)
+    .memedeck--card:nth-child(5) {
+    /* Fifth of 5 cards */
+    @apply -translate-x-86 translate-y-16 rotate-12 transform;
+  }
+}
+
+.memedeck-hand {
+  @apply transform-gpu;
+}

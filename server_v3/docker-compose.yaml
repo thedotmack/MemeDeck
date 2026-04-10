@@ -1,0 +1,42 @@
+services:
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  jupiter-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "jupiter-proxy.mjs"]
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.jupiter-proxy.rule=Host(`ws.memedeck.win`)"
+      - traefik.http.services.jupiter-proxy.loadbalancer.server.port=3004
+
+  token-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["node", "token-analysis.mjs"]
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - NEXT_JS_API_URL=https://memedeck.win
+    depends_on:
+      - redis
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.token-analysis.rule=Host(`api.memedeck.win`)"
+      - traefik.http.services.token-analysis.loadbalancer.server.port=3005
+
+volumes:
+  redis-data:

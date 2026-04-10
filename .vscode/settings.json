@@ -1,0 +1,118 @@
+{
+  // Copilot Settings
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": true,
+    "markdown": false,
+    "scminput": false,
+    "php": true,
+    "html": true,
+    "css": true,
+    "js": true,
+    "yaml": true
+  },
+  
+  // Enable Claude models in Copilot
+  "github.copilot.chat.models": [
+    "claude-3-5-sonnet",
+    "claude-sonnet-4",
+    "claude-opus-4",
+    "gpt-4o",
+    "o1-preview"
+  ],
+  
+  // Project-specific Copilot instructions
+  "github.copilot.instructions": [
+    "Follow MemeDeck patterns: NO useEffect with Zustand, NO comments in code",
+    "Use Zustand store actions only, never getState() in components",
+    "Always fail fast - no silent errors or fallbacks",
+    "Use trading terminology (buy/sell not add/remove)",
+    "Check existing patterns in /components and /lib/stores before implementing"
+  ],
+
+  // TypeScript Settings
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  
+  // Editor Settings for MemeDeck
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  
+  // File Associations
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "codemcp.toml": "toml"
+  },
+  
+  // Exclude from search
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/logs": true,
+    "**/.git": true,
+    "**/dist": true
+  },
+  
+  // Terminal Settings for PM2
+  "terminal.integrated.env.osx": {
+    "PM2_HOME": "~/.pm2"
+  },
+  "terminal.integrated.env.linux": {
+    "PM2_HOME": "~/.pm2"
+  },
+  
+  // Custom File Nesting
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.test.ts, ${capture}.spec.ts, ${capture}.types.ts",
+    "*.tsx": "${capture}.test.tsx, ${capture}.spec.tsx, ${capture}.types.ts",
+    "package.json": "package-lock.json, pnpm-lock.yaml, .npmrc",
+    "tsconfig.json": "tsconfig.*.json",
+    ".env": ".env.*"
+  },
+  
+  // Tailwind CSS IntelliSense
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  
+  // Git Settings
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  
+  // Copilot Chat Settings
+  "github.copilot.chat.localeOverride": "en-US",
+  "github.copilot.chat.welcomeMessage": "startup",
+  
+  // Extension Recommendations
+  "extensions.ignoreRecommendations": false,
+  
+  // Workspace-specific words
+  "cSpell.words": [
+    "memedeck",
+    "zustand",
+    "clsx",
+    "tailwindcss",
+    "lucide",
+    "radix",
+    "framer",
+    "solana",
+    "jupiter",
+    "codemcp",
+    "cmdk",
+    "vaul",
+    "ogl",
+  ],
+  // "workbench.colorTheme": "Light High Contrast Theme",
+  // "window.autoDetectColorScheme": false,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#152468",
+    "titleBar.activeForeground": "#00ff08",
+  }
+}

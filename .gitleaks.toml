@@ -1,0 +1,58 @@
+# gitleaks config for memedeck-ui
+#
+# Extends the default ruleset and allowlists false positives that come
+# from Solana on-chain identifiers (public data, not credentials).
+#
+# Solana token mints, AMM pool keys, and account public keys are base58
+# strings of 32-44 characters with ~160 bits of entropy — they trip
+# gitleaks' `generic-api-key` rule even though they're public on-chain
+# identifiers.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key-allowlisted"
+description = "Placeholder rule so per-rule allowlists attach below."
+regex = '''__never_matches_anything_placeholder__'''
+
+# Per-default-rule allowlist applied against the full line context.
+[[rules.allowlists]]
+description = "Solana public identifiers (token mints, AMM keys, account keys)"
+regexTarget = "line"
+regexes = [
+  '''(?i)\b(token_?(id|mint|address)|amm_?key|account_?key)\b''',
+  '''(?i)\bcustom_?token_?mint\b''',
+  '''(?i)\bmock_?token_?mint\b''',
+  '''(?i)\breal_?token_?id\b''',
+  '''(?i)\btest_?token(_?id)?\b''',
+]
+
+# Global allowlist — applied across all rules.
+[allowlist]
+description = "Global false-positive allowlist"
+regexTarget = "line"
+regexes = [
+  '''(?i)\b(token_?(id|mint|address)|amm_?key|account_?key)\b''',
+  '''(?i)\bcustom_?token_?mint\b''',
+  '''(?i)\bmock_?token_?mint\b''',
+  '''(?i)\breal_?token_?id\b''',
+  '''(?i)\btest_?token(_?id)?\b''',
+]
+
+# Paths where Solana test fixtures and API response captures
+# legitimately contain many high-entropy base58 strings.
+paths = [
+  '''(?i)__tests__/.*\.(ts|tsx|js|mjs|json)$''',
+  '''(?i)tests?/.*\.(ts|tsx|js|mjs|json)$''',
+  '''(?i)^layered-cache-test-results\.json$''',
+  '''(?i)^ai-responses-verification\.json$''',
+  '''(?i)^test-ai-store\.js$''',
+  '''(?i)^test-layered-cache\.js$''',
+  '''(?i)^_PLANS/.*\.(md|json)$''',
+  '''(?i)^docs/.*\.md$''',
+  '''(?i)^scripts/test-response-size-matrix\.mjs$''',
+  '''(?i)^todo/.*\.(js|ts)$''',
+]
+
+commits = []
